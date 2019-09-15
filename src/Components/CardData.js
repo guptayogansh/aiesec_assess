@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Modal, Button } from "react-bootstrap";
+import { Card, Modal, Button, CardDeck,Container} from "react-bootstrap";
 
 const CardData = ({ cardArrayData, newMethod }) => {
     const [show, setShow] = useState(false);
@@ -33,14 +33,19 @@ const CardData = ({ cardArrayData, newMethod }) => {
         <div>
             {cardArrayData.map((cardData, index) => (
                 <div key={index}>
+                    <Container>
+                     <br/>
+                    <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
                     <Card
+                        className='text-center'
                         border="info"
-                        style={{ width: "23rem" }}
+                        style={{ width: "23rem",display:"flex", flexDirection:'row', cursor:"pointer" }}
                         onClick={handleShow.bind(this, index)}
                     >
                         <Card.Img
                             variant="top"
                             src={cardData.profile_photo_urls.original}
+                            style={{width: "15rem"}}
                         />
                         <Card.Body>
                             <Card.Title>{cardData.title}</Card.Title>
@@ -49,10 +54,12 @@ const CardData = ({ cardArrayData, newMethod }) => {
                                 {cardData.duration + " weeks"}
                             </Card.Subtitle>
                             <br />
-                            <br />
                             <Card.Text> {cardData.branch.organisation.name}</Card.Text>
                         </Card.Body>
                     </Card>
+                    </CardDeck>
+                    <br/><br/>
+                    </Container>
                     <Modal show={show} onHide={handleClose} animation={false}>
                         <Modal.Header closeButton>
                             <Modal.Title>Edit</Modal.Title>
